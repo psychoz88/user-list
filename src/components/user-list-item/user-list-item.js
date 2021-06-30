@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
 
 import './user-list-item.css';
 
-class UserListItem extends Component {
+export default class UserListItem extends Component {
 
   render() {
 
-    const {t} = this.props
     const {name, onDeleted} = this.props;
 
     return (
@@ -20,12 +18,10 @@ class UserListItem extends Component {
             type="button"
             className="btn btn-outline-danger btn-sm float-right"
             onClick={onDeleted}>
-              {t("buttons.delete")}
+              <i className="fa fa-trash-o" />
           </button>
         </span>
       </span>
     );
   };
 }
-
-export default withTranslation()(UserListItem);
