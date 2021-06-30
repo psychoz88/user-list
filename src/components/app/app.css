@@ -1,0 +1,21 @@
+.todo-app {
+  margin: 2rem auto 0 auto;
+  max-width: 400px;
+}
+
+.top-panel {
+  margin: 1rem 0;
+}
+
+.main-content {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.select-person {
+  margin-top: 10px;
+}
+
+.select-person span {
+  padding-left: 10px;
+}

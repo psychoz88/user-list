@@ -1,0 +1,17 @@
+{
+    "title": "User list",
+    "formTitles": {
+        "name": "Name",
+        "age": "Age",
+        "email": "Email",
+        "address": "Address"
+    },
+    "buttons": {
+        "add": "Add user",
+        "edit": "Edit",
+        "save": "Save changes",
+        "close": "Close"
+    },
+    "modalTitle": "Editing user",
+    "selectPerson": "Select user from the list!"
+}

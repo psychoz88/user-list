@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# user-service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Цей додаток створений для управління користувачами. Користувача можна створити, відредагувати, видалити або подивитись про нього інформацію. Зауважимо, що обов'язковою інформацією для створення користувача є:
+* Name
+* Age
+* Email
 
-## Available Scripts
+та не обов'язковою для заповнення:
 
-In the project directory, you can run:
+* Address.
+  
+Додаток простий у використанні. Ви можете знайти користувача використовуючи фільтер.
 
-### `npm start`
+## Інтерфейс командного рядка додатку ./srv
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```GO
+NAME:
+   user-service - command line client
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+USAGE:
+   srv [global options] command [command options] [arguments...]
 
-### `npm test`
+VERSION:
+   0.0.1
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+DESCRIPTION:
+   Users API service
 
-### `npm run build`
+AUTHOR:
+   Tuzovska Mariia
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+COMMANDS:
+   start    starting service via http
+   help, h  Shows a list of commands or help for one command
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## /users endpoint
 
-### `npm run eject`
+### /users method GET - відтворення списку користувачів + фільтер
+  
+* Request: 
+       
+*Name* - ім'я користувача. Поле для фільтру;
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+*Age* - вік користувача (не менше 1). Поле для фільтру;
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+*Email* - поштова адреса користувача. Обов'язкова наявність знаків '@', '.'. Поле для фільтру;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+*Address* - адреса проживання користувача. Поле для фільтру.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+*Приклад запиту:*
 
-## Learn More
+запит в url */users?Name=Mariia&Age=22*
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Response:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+*MIME-type*: application/json
 
-### Code Splitting
+*StatusCode*: StatusOK
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+*Приклад відповіді:*
 
-### Analyzing the Bundle Size
+```JSON
+   {
+    "1": {
+        "Name": "Mariia",
+        "Age": 22,
+        "Email": "mariia@gmail.com",
+        "Address": "Kyiv, Smolenska street, 31/35"
+    },
+    "2": {
+        "Name": "Jenia",
+        "Age": 24,
+        "Email": "jenia@gmail.com",
+        "Address": "Kyiv, Smolenska street, 31/35"
+    }
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### /users method POST - створення користувача
 
-### Making a Progressive Web App
+* Request: 
+  
+*form-data, x-www-form-urlencoded, raw JSON*
+       
+*Name* - ім'я користувача. Обов'язкове поле;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+*Age* - вік користувача (не менше 1). Обов'язкове поле;
 
-### Advanced Configuration
+*Email* - поштова адреса користувача. Обов'язкова наявність знаків '@', '.'. Обов'язкове поле;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+*Address* - адреса проживання користувача. Не обов'язкове поле.
 
-### Deployment
+* Response:
+   
+*MIME-type*: application/json
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+*StatusCode*: StatusOK
 
-### `npm run build` fails to minify
+## /users/{userID} endpoint
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### /users/{userID} method GET - відтворення інформації про користувача за ідентифікатором
+
+* Response:
+   
+*MIME-type*: application/json
+
+*StatusCode*: StatusOK
+
+### /users/{userID} method PUT - редагування інформації про користувача за ідентифікатором
+
+* Request: 
+  
+*form-data, x-www-form-urlencoded, raw JSON*
+       
+*Name* - ім'я користувача
+
+*Age* - вік користувача (не менше 1)
+
+*Email* - поштова адреса користувача. Обов'язкова наявність знаків '@', '.'
+
+*Address* - адреса проживання користувача
+
+* Response:
+   
+*MIME-type*: application/json
+
+*StatusCode*: StatusOK
+
+### /users/{userID} method DELETE - видалення користувача за ідентифікатором
+
+* Response:
+   
+*MIME-type*: text/plain
+
+*StatusCode*: StatusNoContent
+
+## Завдання
+
+Використовуючи довільний фреймворк створити клієнтську частину інтерфейсу користувача (UI) до програмної частини додатку *./srv*.
+
+**Обов'язково до виконання**:
+
+1) пепегляд списку користувачів
+
+2) форма створення користувача
+   
+3) перегляд конкретного користувача + його редагування в одній формі (можливість збереження змін та відкликання (підказка, можна викликати ще раз GET якщо тицьнути на кнопку *отменить*))
+   
+4) наявність i18n: російська, англійська та українська. дефолтна — англійська 
+
+**Додаткові завдання**:
+
+1) додати фільтр на пепегляд списку користувачів (вкладка, форма для фільтру, як більше до вподоби)
+
+**Підсумок**:
+
+Має вийти три форми: список користувачів, створення користувача з валідатором, перегляд + редагування користувача за ідентифікатором. Наявність варіації мови web-додатку.
+   
+**Поради**:
+
+1) пригадайте що таке API-сервіси та UI
+   
+2) спробуйте додаток ./srv у Postman
+   
+3) з валідатором користувачеві краще зрозуміти, коли він ввів данні не правильно, ніж посилати на сервер не валідні данні та отримувати помилку
+   
+4) форми мають бути зрозумілі і прості
+   
+5) що занадто то не здраво. мінімальна кількість кнопочок мають творити дива
+
+*Зауваження: У кожному методі за наявності помилок у запиті, лог додатку відображає інформацію про помилку, а код статусу набуває значення StatusBadRequest.*

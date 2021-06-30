@@ -1,0 +1,18 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header h2 {
+  font-size: 1.2rem;
+  color: grey;
+}
+
+.title {
+  margin-left: 30px;
+}
+
+.lang-buttons {
+  padding-right: 25px;
+}
