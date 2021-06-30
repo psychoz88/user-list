@@ -7,10 +7,11 @@
         "address": "Address"
     },
     "buttons": {
-        "add": "Add user",
+        "add": "Add",
         "edit": "Edit",
         "save": "Save changes",
-        "close": "Close"
+        "close": "Close",
+        "delete": "Delete"
     },
     "modalTitle": "Editing user",
     "selectPerson": "Select user from the list!"
